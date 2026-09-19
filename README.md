@@ -15,6 +15,7 @@ css/
 js/
   config.js           BOOKING_URL (link da agenda)
   services-data.js    serviços, preços e itens (Carro e Moto)
+  additional-services-data.js  card "Serviços adicionais e para motos" (vale pros dois)
   render-services.js  monta os cards a partir dos dados
   navbar.js           menu mobile + borda da navbar ao rolar
   segmented.js        seletor Carro/Moto
@@ -32,7 +33,9 @@ assets/images/hero.jpg + hero.webp
 |---|---|
 | Link da agenda | `js/config.js`, constante `BOOKING_URL` (vale pra todos os botões) |
 | Serviços, preços, itens | `js/services-data.js` |
-| Foto do hero | `assets/images/hero.jpg` e `hero.webp` |
+| Serviços adicionais e valores | `js/additional-services-data.js` |
+| Avaliações (template) e galeria (placeholders) | `index.html`, seções `#avaliacoes` e `#galeria` |
+| Foto do hero, logo, favicon | `assets/images/` |
 | Cores e medidas | `css/tokens.css` |
 | Textos fixos | `index.html` |
 
@@ -55,7 +58,6 @@ Todos os caminhos são relativos, então funciona no subdiretório do Pages.
 
 ## Pendências
 
-- Logo em arquivo (hoje é texto provisório na navbar e no CTA final).
-- Favicon.
-- Foto do hero em resolução maior (a atual tem 360 x 572 px e é ampliada no design de 412 x 618).
+- Avaliações: os cards são template (borda tracejada). Trocar por depoimentos reais quando existirem.
+- Galeria: os 5 blocos são placeholders. Trocar por fotos reais dos trabalhos.
 - Confirmar os itens dos serviços de Carro (exceto o Detalhada Completa) e todos os de Moto, que não estão no Figma.

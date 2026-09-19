@@ -54,6 +54,8 @@
   <nav class="mobile-menu" id="mobileMenu" aria-label="Menu principal">
     <a href="#inicio">Início</a>
     <a href="#servicos">Serviços</a>
+    <a href="#avaliacoes">Avaliações</a>
+    <a href="#galeria">Galeria</a>
     <a href="#agendar">Agendar</a>
   </nav>
 
@@ -142,6 +144,76 @@
         <div class="services__panel" id="panelMoto" role="tabpanel" aria-labelledby="tabMoto" hidden>
           <div class="services__list" id="listMoto"></div>
         </div>
+
+        <!-- Serviços adicionais — valem pra carro e moto, por isso ficam fora do seletor -->
+        <div id="additionalServices"></div>
+      </div>
+    </section>
+
+    <!-- ===================== AVALIAÇÕES (template) ===================== -->
+    <!--
+      IMPORTANTE: os cards abaixo são um TEMPLATE, não depoimentos reais.
+      Nome/foto/texto são placeholders propositais (borda tracejada) até a
+      Brabo Studio ter avaliações reais de clientes pra colocar aqui.
+      Substitua cada .review-card pelo conteúdo real quando estiver disponível.
+    -->
+    <section class="section reviews" id="avaliacoes">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__eyebrow">AVALIAÇÕES</span>
+          <h2 class="section__title">O que nossos <em>clientes</em> dizem</h2>
+          <p class="section__subtitle">A sua opinião ajuda outros donos de carro e moto a confiarem no nosso trabalho.</p>
+        </div>
+
+        <div class="reviews__scroll">
+          <article class="review-card">
+            <div class="review-card__stars" aria-hidden="true">★★★★★</div>
+            <p class="review-card__quote">[Espaço reservado — cole aqui um depoimento real do seu cliente sobre o serviço.]</p>
+            <div class="review-card__person">
+              <div class="review-card__avatar" aria-hidden="true"></div>
+              <span class="review-card__name">Nome do Cliente</span>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-card__stars" aria-hidden="true">★★★★★</div>
+            <p class="review-card__quote">[Espaço reservado — cole aqui um depoimento real do seu cliente sobre o serviço.]</p>
+            <div class="review-card__person">
+              <div class="review-card__avatar" aria-hidden="true"></div>
+              <span class="review-card__name">Nome do Cliente</span>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-card__stars" aria-hidden="true">★★★★★</div>
+            <p class="review-card__quote">[Espaço reservado — cole aqui um depoimento real do seu cliente sobre o serviço.]</p>
+            <div class="review-card__person">
+              <div class="review-card__avatar" aria-hidden="true"></div>
+              <span class="review-card__name">Nome do Cliente</span>
+            </div>
+          </article>
+        </div>
+
+        <p class="reviews__note">Tem uma avaliação real pra colocar aqui? Manda pra gente que a gente atualiza.</p>
+      </div>
+    </section>
+
+    <!-- ===================== GALERIA (placeholders) ===================== -->
+    <!--
+      IMPORTANTE: blocos abaixo são placeholders (borda tracejada) até termos
+      as fotos reais dos trabalhos da Brabo Studio. Substitua cada
+      .gallery__item por uma <img> real quando as fotos estiverem prontas.
+    -->
+    <section class="section gallery" id="galeria">
+      <div class="section__header">
+        <span class="section__eyebrow">PORTFÓLIO</span>
+        <h2 class="section__title">Nossos trabalhos mais <em>brabo</em></h2>
+      </div>
+
+      <div class="gallery__scroll">
+        <div class="gallery__item"><span>FOTO DO<br />TRABALHO</span></div>
+        <div class="gallery__item"><span>FOTO DO<br />TRABALHO</span></div>
+        <div class="gallery__item"><span>FOTO DO<br />TRABALHO</span></div>
+        <div class="gallery__item"><span>FOTO DO<br />TRABALHO</span></div>
+        <div class="gallery__item"><span>FOTO DO<br />TRABALHO</span></div>
       </div>
     </section>
 
@@ -186,6 +258,7 @@
 
   <script src="js/config.js"></script>
   <script src="js/services-data.js"></script>
+  <script src="js/additional-services-data.js"></script>
   <script src="js/render-services.js"></script>
   <script src="js/navbar.js"></script>
   <script src="js/segmented.js"></script>
