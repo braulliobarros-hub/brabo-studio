@@ -12,8 +12,10 @@
   <meta property="og:locale" content="pt_BR" />
 
   <meta name="theme-color" content="#050506" />
-  <!-- Favicon: ainda não fornecido. Quando existir, troque por <link rel="icon" href="assets/images/favicon.png"> -->
-  <link rel="icon" href="data:," />
+  <link rel="icon" href="assets/images/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicon-192.png" />
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,11 +33,8 @@
   <!-- ===================== NAVBAR ===================== -->
   <header class="navbar" id="navbar">
     <div class="navbar__inner">
-      <a href="#inicio" class="logo" aria-label="Brabo Studio, início">
-        BRAB<span class="logo__o">O</span>
-        <span class="logo__stack">
-          <span class="logo__studio">STUDIO</span>
-        </span>
+      <a href="#inicio" class="logo-link" aria-label="Brabo Studio, início">
+        <img class="logo-img" src="assets/images/logo.png" alt="" width="106" height="38" />
       </a>
       <button
         class="menu-toggle"
@@ -65,12 +64,18 @@
       <div class="hero__stage">
         <div class="hero__media" aria-hidden="false">
           <picture>
-            <source srcset="assets/images/hero.webp" type="image/webp" />
+            <source
+              type="image/webp"
+              srcset="assets/images/hero-640.webp 640w, assets/images/hero.webp 1024w"
+              sizes="(min-width: 480px) 480px, 106vw"
+            />
             <img
               src="assets/images/hero.jpg"
+              srcset="assets/images/hero-640.jpg 640w, assets/images/hero.jpg 1024w"
+              sizes="(min-width: 480px) 480px, 106vw"
               alt="Braullio, dono da Brabo Studio, ajeitando o punho da camisa branca em fundo escuro"
-              width="360"
-              height="572"
+              width="1024"
+              height="1536"
               fetchpriority="high"
               decoding="async"
             />
@@ -144,12 +149,7 @@
     <section class="cta-final" id="agendar" aria-labelledby="ctaTitulo">
       <div class="cta-final__glow" aria-hidden="true"></div>
       <div class="container cta-final__inner">
-        <div class="cta-final__logo logo" aria-hidden="true">
-          BRAB<span class="logo__o">O</span>
-          <span class="logo__stack">
-            <span class="logo__studio">STUDIO</span>
-          </span>
-        </div>
+        <img class="cta-final__logo logo-img" src="assets/images/logo.png" alt="" width="106" height="38" aria-hidden="true" />
 
         <div class="cta-final__divider" aria-hidden="true"></div>
 
