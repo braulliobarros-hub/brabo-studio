@@ -34,7 +34,7 @@ assets/images/hero.jpg + hero.webp
 | Link da agenda | `js/config.js`, constante `BOOKING_URL` (vale pra todos os botões) |
 | Serviços, preços, itens | `js/services-data.js` |
 | Serviços adicionais e valores | `js/additional-services-data.js` |
-| Avaliações (template) e galeria (placeholders) | `index.html`, seções `#avaliacoes` e `#galeria` |
+| Avaliações e galeria | `index.html`, seções `#avaliacoes` e `#galeria` (fotos em `assets/images/gallery/` e `reviews/`) |
 | Foto do hero, logo, favicon | `assets/images/` |
 | Cores e medidas | `css/tokens.css` |
 | Textos fixos | `index.html` |
@@ -58,6 +58,6 @@ Todos os caminhos são relativos, então funciona no subdiretório do Pages.
 
 ## Pendências
 
-- Avaliações: os cards são template (borda tracejada). Trocar por depoimentos reais quando existirem.
-- Galeria: os 5 blocos são placeholders. Trocar por fotos reais dos trabalhos.
+- Galeria: as 7 fotos vieram em 180x240px. Trocar por originais (mín. 300x400) pra ficar nítido em tela retina.
+- Avaliação do Rafael termina em "ganhou outro" (texto do design). Confirmar o texto completo.
 - Confirmar os itens dos serviços de Carro (exceto o Detalhada Completa) e todos os de Moto, que não estão no Figma.
