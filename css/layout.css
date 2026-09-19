@@ -276,3 +276,8 @@
 body.has-sticky-cta .page-end-spacer {
   height: calc(var(--sticky-height) + env(safe-area-inset-bottom));
 }
+
+/* Espaço entre o último card de serviço e o de serviços adicionais (mesmo gap da lista) */
+#additionalServices {
+  margin-top: var(--space-6);
+}
