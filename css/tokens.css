@@ -1,0 +1,60 @@
+/* ==========================================================================
+   Brabo Studio: design tokens
+   Fonte: arquivo Figma "Brabo Studio" (frames 01, 02 e 03 da landing mobile).
+   ========================================================================== */
+:root {
+  /* Cores (variáveis do Figma: preto-brabo, azul-brabo, branco, cinza-grafite) */
+  --color-bg: #050506;
+  --color-surface-card: #101113;
+  --color-primary: #0064FE;
+  --color-text: #FFFFFF;
+  --color-muted: #8A8D93;
+
+  --border-hairline: rgba(255, 255, 255, 0.06);
+  --border-hairline-strong: rgba(255, 255, 255, 0.16);
+
+  /* Espaçamento */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-14: 56px;
+  --space-16: 64px;
+
+  --safe-x: 20px;
+
+  /* Raios */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --radius-pill: 20px;
+
+  /* Tipografia */
+  --font-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --fs-h1: clamp(28px, 8.72vw, 34px);   /* 34px em 390px */
+  --fs-h2: clamp(23px, 6.67vw, 26px);   /* 26px em 390px */
+  --fs-cta-1: clamp(21px, 6.15vw, 24px);
+  --fs-cta-2: clamp(24px, 7.18vw, 28px);
+  --fs-body: 15px;
+  --fs-card-title: 15px;
+  --fs-small: 13px;
+  --fs-micro: 11px;
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-tap: 150ms;
+  --dur-micro: 200ms;
+  --dur-transition: 320ms;
+  --dur-reveal: 480ms;
+
+  /* Layout */
+  --content-max: 480px; /* largura máxima do "miolo" mobile em telas grandes */
+  --navbar-height: 64px;
+  --sticky-height: 76px;
+}
