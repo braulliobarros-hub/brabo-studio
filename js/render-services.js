@@ -78,6 +78,57 @@
       .join('');
   }
 
+  // ---------- Card "Serviços adicionais e para motos" ----------
+  // Card sempre aberto (sem accordion): reúne extras avulsos que valem
+  // tanto pra carro quanto pra moto, por isso fica fora do seletor Carro/Moto.
+  function renderPriceItem(item) {
+    return `
+      <div class="service-card__price-item">
+        <span class="service-card__item-check" aria-hidden="true">✓</span>
+        <span class="service-card__price-item-label">${escapeHtml(item.label)}</span>
+        <span class="service-card__price-item-value">${escapeHtml(item.price)}</span>
+      </div>`;
+  }
+
+  function renderCategory(category) {
+    const description = category.description
+      ? `<p class="service-card__category-desc">${escapeHtml(category.description)}</p>`
+      : '';
+    return `
+      <div class="service-card__category">
+        <p class="service-card__category-name">${escapeHtml(category.name)}</p>
+        ${description}
+        ${category.items.map(renderPriceItem).join('')}
+      </div>`;
+  }
+
+  function renderAdditionalServices(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container || typeof ADDITIONAL_SERVICES === 'undefined') return;
+    const data = ADDITIONAL_SERVICES;
+
+    container.innerHTML = `
+      <article class="service-card service-card--additional" data-service-id="${escapeHtml(data.id)}">
+        <h3 class="service-card__name">${escapeHtml(data.title)}</h3>
+        <p class="service-card__summary">${escapeHtml(data.summary)}</p>
+
+        <p class="service-card__group-label">BENEFÍCIOS</p>
+        ${renderItemsList(data.benefits)}
+
+        <p class="service-card__group-label">SERVIÇOS E VALORES</p>
+        ${data.categories.map(renderCategory).join('')}
+
+        <p class="service-card__contact-note">${escapeHtml(data.contactNote)}</p>
+
+        <div class="service-card__cta">
+          <a href="#" class="btn btn--card" data-booking data-service-id="${escapeHtml(data.id)}">
+            ${escapeHtml(data.ctaLabel)}
+          </a>
+        </div>
+      </article>`;
+  }
+
   renderList('carro', 'listCarro');
   renderList('moto', 'listMoto');
+  renderAdditionalServices('additionalServices');
 })();

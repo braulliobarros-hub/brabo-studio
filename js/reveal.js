@@ -5,7 +5,7 @@
 (function () {
   var targets = document.querySelectorAll(
     '.hero__headline, .hero__support, .hero__actions, .hero__tag, ' +
-    '.section__header, .services__selector, .service-card, ' +
+    '.section__header, .services__selector, .service-card, .review-card, .gallery__item, ' +
     '.cta-final__logo, .cta-final__divider, .cta-final__heading, .cta-final__quote, ' +
     '.cta-final__handle, .cta-final__meta'
   );
