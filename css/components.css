@@ -375,25 +375,76 @@
   line-height: 1.5;
 }
 
-/* ---------- Avaliações (template) ---------- */
+/* ---------- Carrosséis com foco (avaliações e galeria) ----------
+   O item mais perto do centro fica nítido e com brilho azul leve.
+   Os outros ficam levemente desfocados. js/carousel-focus.js marca .is-active. */
 .reviews {
   overflow: hidden;
 }
-.reviews__scroll {
+.focus-scroller {
+  --item-w: 150px;
+  --scroller-gap: 12px;
   display: flex;
-  gap: var(--space-3);
+  gap: var(--scroller-gap);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding-bottom: var(--space-2);
-  margin-inline: calc(var(--safe-x) * -1);
-  padding-inline: var(--safe-x);
+  scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
+  /* respiro em cima/embaixo pro brilho não ser cortado */
+  padding-block: 28px;
+  margin-block: -28px;
+}
+.focus-scroller::-webkit-scrollbar {
+  display: none;
+}
+/* espaçadores: deixam o primeiro e o último item conseguirem chegar no centro */
+.focus-scroller::before,
+.focus-scroller::after {
+  content: '';
+  flex: 0 0 calc(50% - var(--item-w) / 2 - var(--scroller-gap));
+}
+.focus-scroller > * {
+  scroll-snap-align: center;
+}
+.focus-scroller:focus-visible {
+  outline-offset: -2px;
+}
+
+/* estados: só valem quando o JS está ativo (.is-ready) */
+.focus-scroller.is-ready > * {
+  filter: blur(2px);
+  opacity: 0.55;
+  transform: scale(0.94);
+  cursor: pointer;
+  transition: filter var(--dur-transition) var(--ease-standard),
+              opacity var(--dur-transition) var(--ease-standard),
+              transform var(--dur-transition) var(--ease-standard),
+              box-shadow var(--dur-transition) var(--ease-standard),
+              border-color var(--dur-transition) var(--ease-standard);
+}
+.focus-scroller.is-ready > .is-active {
+  filter: none;
+  opacity: 1;
+  transform: none;
+  cursor: default;
+  border-color: rgba(0, 100, 254, 0.55);
+  box-shadow: 0 0 0 1px rgba(0, 100, 254, 0.18),
+              0 0 26px rgba(0, 100, 254, 0.32);
+}
+@media (prefers-reduced-motion: reduce) {
+  .focus-scroller.is-ready > * {
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+}
+
+.reviews__scroll {
+  --item-w: min(280px, 78vw);
+  margin-inline: calc(var(--safe-x) * -1);
 }
 .review-card {
-  flex: 0 0 auto;
-  width: 78%;
-  max-width: 280px;
-  scroll-snap-align: start;
+  flex: 0 0 var(--item-w);
   background: var(--color-surface-card);
   border: 1px dashed var(--border-hairline-strong);
   border-radius: var(--radius-lg);
@@ -437,18 +488,13 @@
 
 /* ---------- Galeria (placeholder) ---------- */
 .gallery__scroll {
-  display: flex;
-  gap: var(--space-2);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-right: var(--safe-x);
-  -webkit-overflow-scrolling: touch;
+  --item-w: 150px;
+  --scroller-gap: 8px;
+  padding-inline: 0;
 }
 .gallery__item {
-  flex: 0 0 auto;
-  width: 150px;
+  flex: 0 0 var(--item-w);
   height: 200px;
-  scroll-snap-align: start;
   border-radius: var(--radius-md);
   border: 1px dashed var(--border-hairline-strong);
   background: rgba(255, 255, 255, 0.03);

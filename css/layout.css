@@ -192,9 +192,6 @@
 .gallery .section__header {
   padding-inline: var(--safe-x);
 }
-.gallery__scroll {
-  padding-left: var(--safe-x);
-}
 
 /* ---------- CTA Final ---------- */
 .cta-final {
