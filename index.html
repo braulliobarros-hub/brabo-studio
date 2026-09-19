@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Brabo Studio | Estética Automotiva</title>
+  <meta name="description" content="Brabo Studio: detalhamento automotivo para carros e motos em São Miguel dos Campos, AL. Escolha o nível de cuidado e agende seu horário." />
+
+  <meta property="og:title" content="Brabo Studio | Estética Automotiva" />
+  <meta property="og:description" content="Detalhamento automotivo para carros e motos, em São Miguel dos Campos, AL. Agende seu horário." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <meta name="theme-color" content="#050506" />
+  <!-- Favicon: ainda não fornecido. Quando existir, troque por <link rel="icon" href="assets/images/favicon.png"> -->
+  <link rel="icon" href="data:," />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="#inicio" class="logo" aria-label="Brabo Studio, início">
+        BRAB<span class="logo__o">O</span>
+        <span class="logo__stack">
+          <span class="logo__studio">STUDIO</span>
+        </span>
+      </a>
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+        aria-label="Abrir menu"
+      >
+        <span class="menu-toggle__bars" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Menu principal">
+    <a href="#inicio">Início</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#agendar">Agendar</a>
+  </nav>
+
+  <main id="conteudo">
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="inicio">
+      <div class="hero__stage">
+        <div class="hero__media" aria-hidden="false">
+          <picture>
+            <source srcset="assets/images/hero.webp" type="image/webp" />
+            <img
+              src="assets/images/hero.jpg"
+              alt="Braullio, dono da Brabo Studio, ajeitando o punho da camisa branca em fundo escuro"
+              width="360"
+              height="572"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </picture>
+        </div>
+        <div class="hero__bubbles" id="heroBubbles" aria-hidden="true"></div>
+
+        <div class="hero__content">
+          <h1 class="hero__headline">Cuidado raro com o que você tem orgulho de dirigir.</h1>
+
+          <p class="hero__support">
+            Detalhamento automotivo para carros e motos, em São Miguel dos Campos, AL.
+          </p>
+
+          <div class="hero__actions">
+            <a href="#" class="btn btn--primary" id="heroCtaBtn" data-booking>AGENDAR MEU HORÁRIO</a>
+            <a href="#servicos" class="btn btn--secondary" id="verServicosBtn">VER SERVIÇOS</a>
+          </div>
+
+          <span class="tag-pill hero__tag">CARROS + MOTOS</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SELETOR + SERVIÇOS ===================== -->
+    <section class="section services" id="servicos" aria-labelledby="servicosTitulo">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__eyebrow">NOSSOS SERVIÇOS</span>
+          <h2 class="section__title" id="servicosTitulo">Escolha o nível de cuidado.</h2>
+        </div>
+
+        <div
+          class="segmented services__selector"
+          role="tablist"
+          aria-label="Escolher tipo de veículo"
+        >
+          <button
+            class="segmented__btn"
+            id="tabCarro"
+            role="tab"
+            type="button"
+            aria-selected="true"
+            aria-controls="panelCarro"
+          >
+            CARRO
+          </button>
+          <button
+            class="segmented__btn"
+            id="tabMoto"
+            role="tab"
+            type="button"
+            aria-selected="false"
+            aria-controls="panelMoto"
+          >
+            MOTO
+          </button>
+        </div>
+
+        <div class="services__panel" id="panelCarro" role="tabpanel" aria-labelledby="tabCarro">
+          <div class="services__list" id="listCarro"></div>
+        </div>
+
+        <div class="services__panel" id="panelMoto" role="tabpanel" aria-labelledby="tabMoto" hidden>
+          <div class="services__list" id="listMoto"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA FINAL ===================== -->
+    <section class="cta-final" id="agendar" aria-labelledby="ctaTitulo">
+      <div class="cta-final__glow" aria-hidden="true"></div>
+      <div class="container cta-final__inner">
+        <div class="cta-final__logo logo" aria-hidden="true">
+          BRAB<span class="logo__o">O</span>
+          <span class="logo__stack">
+            <span class="logo__studio">STUDIO</span>
+          </span>
+        </div>
+
+        <div class="cta-final__divider" aria-hidden="true"></div>
+
+        <h2 class="cta-final__heading" id="ctaTitulo">
+          <span class="cta-final__line1">SEU VEÍCULO MERECE</span>
+          <span class="cta-final__line2">TODO CUIDADO.</span>
+        </h2>
+
+        <p class="cta-final__quote">"Aqui a gente não lava, a gente cuida."</p>
+
+        <a href="#" class="btn btn--primary" id="ctaFinalBtn" data-booking>AGENDAR AGORA</a>
+
+        <p class="cta-final__handle">@obrabostudio</p>
+        <p class="cta-final__meta">São Miguel dos Campos, AL</p>
+      </div>
+    </section>
+
+    <div class="page-end-spacer" aria-hidden="true"></div>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__copy">© 2026 Brabo Studio. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- ===================== STICKY CTA ===================== -->
+  <div class="sticky-cta" id="stickyCta">
+    <div class="container">
+      <a href="#" class="btn btn--primary" id="stickyCtaBtn" data-booking>AGENDAR AGORA</a>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/services-data.js"></script>
+  <script src="js/render-services.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/segmented.js"></script>
+  <script src="js/accordion.js"></script>
+  <script src="js/reveal.js"></script>
+  <script src="js/sticky-cta.js"></script>
+  <script src="js/hero-bubbles.js"></script>
+  <script src="js/booking-links.js"></script>
+</body>
+</html>
