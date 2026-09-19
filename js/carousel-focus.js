@@ -44,7 +44,8 @@
 
     items.forEach(function (item) {
       item.addEventListener('click', function () {
-        if (item.classList.contains('is-active')) return;
+        if (item.hasAttribute('data-full')) return; // galeria: o lightbox cuida do toque
+      if (item.classList.contains('is-active')) return;
         item.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       });
     });
@@ -79,7 +80,7 @@
     }
 
     setInterval(function () {
-      if (!inView || holding || document.hidden || Date.now() < resumeAt) return;
+      if (!inView || holding || document.hidden || document.querySelector('dialog[open]') || Date.now() < resumeAt) return;
       var idx = items.findIndex(function (i) { return i.classList.contains('is-active'); });
       var next = items[(idx + 1) % items.length];
       var left = next.offsetLeft - (scroller.clientWidth - next.offsetWidth) / 2;
