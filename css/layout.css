@@ -190,8 +190,7 @@
   text-align: center;
 }
 .cta-final__logo {
-  height: var(--navbar-height);
-  align-items: center;
+  margin-block: 13px; /* 64px de faixa, como a navbar do design */
 }
 .cta-final__divider {
   width: 60px;

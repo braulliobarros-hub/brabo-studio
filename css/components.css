@@ -2,32 +2,16 @@
    Brabo Studio: componentes
    ========================================================================== */
 
-/* ---------- Logo (provisório em texto: falta o arquivo da logo) ---------- */
-.logo {
+/* ---------- Logo (imagem do Figma: 106 x 38, 2x de resolução) ---------- */
+.logo-link {
   display: inline-flex;
-  align-items: baseline;
-  gap: 2px;
-  font-family: var(--font-base);
-  font-weight: 700;
-  font-size: 22px;
-  letter-spacing: 0.5px;
-  color: var(--color-text);
-  line-height: 1;
+  align-items: center;
+  min-height: 44px;
 }
-.logo .logo__o {
-  color: var(--color-primary);
-}
-.logo__stack {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.logo__studio {
-  font-size: 8px;
-  font-weight: 600;
-  letter-spacing: 3px;
-  color: var(--color-primary);
-  margin-top: 2px;
+.logo-img {
+  display: block;
+  width: auto;
+  height: 38px;
 }
 
 /* ---------- Navbar ---------- */
