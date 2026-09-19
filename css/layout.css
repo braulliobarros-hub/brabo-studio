@@ -281,3 +281,11 @@ body.has-sticky-cta .page-end-spacer {
 #additionalServices {
   margin-top: var(--space-6);
 }
+
+.cta-final__handle a {
+  display: inline-block;
+  padding: 10px 6px;
+  color: var(--color-primary);
+  transition: opacity var(--dur-fast, 150ms) ease;
+}
+.cta-final__handle a:hover { opacity: 0.8; }
