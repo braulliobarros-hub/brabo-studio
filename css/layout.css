@@ -143,6 +143,16 @@
   font-weight: 700;
   line-height: 1.16;
 }
+.section__title em {
+  color: var(--color-primary);
+  font-style: normal;
+}
+.section__subtitle {
+  margin-top: var(--space-2);
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
 
 /* ---------- Seletor + Serviços ---------- */
 .services__selector {
@@ -162,6 +172,28 @@
 @keyframes panel-in {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Avaliações ---------- */
+.reviews {
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-4);
+}
+
+/* ---------- Galeria ---------- */
+.gallery {
+  /* sem .container: limita a largura e centraliza como o resto da coluna */
+  max-width: var(--content-max);
+  margin-inline: auto;
+  overflow: hidden;
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-4);
+}
+.gallery .section__header {
+  padding-inline: var(--safe-x);
+}
+.gallery__scroll {
+  padding-left: var(--safe-x);
 }
 
 /* ---------- CTA Final ---------- */
