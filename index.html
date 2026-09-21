@@ -21,10 +21,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/tokens.css?v=20260919e" />
-  <link rel="stylesheet" href="css/base.css?v=20260919e" />
-  <link rel="stylesheet" href="css/layout.css?v=20260919e" />
-  <link rel="stylesheet" href="css/components.css?v=20260919e" />
+  <link rel="stylesheet" href="css/tokens.css?v=20260921a" />
+  <link rel="stylesheet" href="css/base.css?v=20260921a" />
+  <link rel="stylesheet" href="css/layout.css?v=20260921a" />
+  <link rel="stylesheet" href="css/components.css?v=20260921a" />
+  <link rel="stylesheet" href="css/desktop.css?v=20260921a" />
 </head>
 <body>
 
@@ -36,6 +37,13 @@
       <a href="#inicio" class="logo-link" aria-label="Brabo Studio, início">
         <img class="logo-img" src="assets/images/logo.png" alt="" width="106" height="38" />
       </a>
+      <nav class="navbar__links" aria-label="Menu principal (desktop)">
+        <a href="#inicio">Início</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#avaliacoes">Avaliações</a>
+        <a href="#galeria">Galeria</a>
+      </nav>
+      <a href="#" class="btn btn--primary navbar__cta" id="navCtaBtn" data-booking>AGENDAR</a>
       <button
         class="menu-toggle"
         id="menuToggle"
@@ -69,12 +77,12 @@
             <source
               type="image/webp"
               srcset="assets/images/hero-640.webp 640w, assets/images/hero.webp 1024w"
-              sizes="(min-width: 480px) 480px, 106vw"
+              sizes="(min-width: 1024px) 660px, (min-width: 480px) 480px, 106vw"
             />
             <img
               src="assets/images/hero.jpg"
               srcset="assets/images/hero-640.jpg 640w, assets/images/hero.jpg 1024w"
-              sizes="(min-width: 480px) 480px, 106vw"
+              sizes="(min-width: 1024px) 660px, (min-width: 480px) 480px, 106vw"
               alt="Braullio, dono da Brabo Studio, ajeitando o punho da camisa branca em fundo escuro"
               width="1024"
               height="1536"
@@ -264,18 +272,18 @@
     <p class="lightbox__count" id="lbCount" aria-live="polite"></p>
   </dialog>
 
-  <script src="js/config.js?v=20260919e"></script>
-  <script src="js/services-data.js?v=20260919e"></script>
-  <script src="js/additional-services-data.js?v=20260919e"></script>
-  <script src="js/render-services.js?v=20260919e"></script>
-  <script src="js/navbar.js?v=20260919e"></script>
-  <script src="js/segmented.js?v=20260919e"></script>
-  <script src="js/accordion.js?v=20260919e"></script>
-  <script src="js/reveal.js?v=20260919e"></script>
-  <script src="js/carousel-focus.js?v=20260919e"></script>
-  <script src="js/lightbox.js?v=20260919e"></script>
-  <script src="js/sticky-cta.js?v=20260919e"></script>
-  <script src="js/hero-bubbles.js?v=20260919e"></script>
-  <script src="js/booking-links.js?v=20260919e"></script>
+  <script src="js/config.js?v=20260921a"></script>
+  <script src="js/services-data.js?v=20260921a"></script>
+  <script src="js/additional-services-data.js?v=20260921a"></script>
+  <script src="js/render-services.js?v=20260921a"></script>
+  <script src="js/navbar.js?v=20260921a"></script>
+  <script src="js/segmented.js?v=20260921a"></script>
+  <script src="js/accordion.js?v=20260921a"></script>
+  <script src="js/reveal.js?v=20260921a"></script>
+  <script src="js/carousel-focus.js?v=20260921a"></script>
+  <script src="js/lightbox.js?v=20260921a"></script>
+  <script src="js/sticky-cta.js?v=20260921a"></script>
+  <script src="js/hero-bubbles.js?v=20260921a"></script>
+  <script src="js/booking-links.js?v=20260921a"></script>
 </body>
 </html>
