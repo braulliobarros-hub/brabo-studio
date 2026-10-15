@@ -1,94 +1,99 @@
 /* ==========================================================================
-   Farol de milha: decorativo, fixo na lateral direita.
-   Acende suave quando a pessoa rola a página ou mexe o mouse, e apaga
-   sozinho depois de um tempo parado (controle em js/fog-light.js).
+   Farol de milha: luz de LED (estilo farol aceso na neblina) que segue o
+   mouse ou anda com o scroll. Acende suave com movimento e apaga sozinha
+   quando a pessoa para. Controle em js/fog-light.js.
    ========================================================================== */
 .fog-light {
-  --fl-size: 72px;
-  --fl-dur-on: 700ms;
-  --fl-dur-off: 1400ms;
+  --fl-size: 380px;
   position: fixed;
-  top: 50%;
-  right: calc(var(--fl-size) * -0.5);
+  inset: 0;
+  z-index: 35;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1400ms var(--ease-standard);
+  mix-blend-mode: screen;
+}
+.fog-light.is-on {
+  opacity: 1;
+  transition-duration: 600ms;
+}
+
+/* Ponto de luz (posição controlada por transform no JS) */
+.fog-light__led {
+  position: absolute;
+  left: 0;
+  top: 0;
   width: var(--fl-size);
   height: var(--fl-size);
-  transform: translateY(-50%);
-  z-index: 35;
-  pointer-events: none;
+  margin: calc(var(--fl-size) / -2) 0 0 calc(var(--fl-size) / -2);
+  will-change: transform;
 }
 
-/* Feixe de luz projetado pra esquerda */
-.fog-light__beam {
+.fog-light__led > span {
   position: absolute;
-  top: 50%;
-  right: 50%;
-  width: min(120vw, 1100px);
-  height: calc(var(--fl-size) * 5);
-  transform: translateY(-50%);
-  background:
-    radial-gradient(ellipse 60% 50% at 100% 50%,
-      rgba(225, 238, 255, 0.30) 0%,
-      rgba(120, 175, 255, 0.14) 35%,
-      rgba(0, 100, 254, 0.05) 60%,
-      rgba(0, 100, 254, 0) 80%);
-  clip-path: polygon(100% 44%, 0 0, 0 100%, 100% 56%);
-  filter: blur(20px);
-  opacity: 0;
-  transition: opacity var(--fl-dur-off) var(--ease-standard);
-  mix-blend-mode: screen;
-}
-
-/* Brilho em volta do farol (bloom) */
-.fog-light__bloom {
-  position: absolute;
-  inset: -70%;
+  inset: 0;
   border-radius: 50%;
+}
+
+/* Neblina iluminada em volta, bem aberta */
+.fog-light__wash {
+  inset: -60% !important;
   background: radial-gradient(circle,
-    rgba(235, 244, 255, 0.55) 0%,
-    rgba(110, 170, 255, 0.22) 30%,
-    rgba(0, 100, 254, 0) 65%);
-  opacity: 0;
-  transition: opacity var(--fl-dur-off) var(--ease-standard);
-  mix-blend-mode: screen;
+    rgba(120, 170, 255, 0.16) 0%,
+    rgba(40, 110, 255, 0.07) 30%,
+    rgba(0, 100, 254, 0) 62%);
 }
 
-.fog-light__svg {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.6));
+/* Bloom: núcleo branco estourado + brilho azulado */
+.fog-light__bloom {
+  background: radial-gradient(circle,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.95) 4%,
+    rgba(225, 238, 255, 0.75) 8%,
+    rgba(160, 198, 255, 0.40) 16%,
+    rgba(80, 140, 255, 0.16) 30%,
+    rgba(0, 100, 254, 0) 55%);
+  animation: fl-breathe 3.2s ease-in-out infinite;
 }
 
-/* Lente acesa: camada por cima da lente apagada */
-.fog-light__lit {
-  opacity: 0;
-  transition: opacity var(--fl-dur-off) var(--ease-standard);
+/* Halo da lente (aquele anel fraquinho em volta do farol) */
+.fog-light__halo {
+  background: radial-gradient(circle,
+    rgba(170, 205, 255, 0) 36%,
+    rgba(170, 205, 255, 0.10) 40%,
+    rgba(170, 205, 255, 0.04) 43%,
+    rgba(170, 205, 255, 0) 47%);
 }
 
-/* ---------- ACESO ---------- */
-.fog-light.is-on .fog-light__beam,
-.fog-light.is-on .fog-light__bloom,
-.fog-light.is-on .fog-light__lit {
-  opacity: 1;
-  transition-duration: var(--fl-dur-on);
+/* Raios em estrela saindo do LED */
+.fog-light__rays {
+  border-radius: 0 !important;
+  background:
+    linear-gradient(90deg, transparent 4%, rgba(215, 232, 255, 0.55) 50%, transparent 96%) center / 100% 2px no-repeat,
+    linear-gradient(0deg, transparent 10%, rgba(215, 232, 255, 0.45) 50%, transparent 90%) center / 2px 100% no-repeat;
+  -webkit-mask-image: radial-gradient(circle, #000 0%, rgba(0, 0, 0, 0.35) 30%, transparent 62%);
+          mask-image: radial-gradient(circle, #000 0%, rgba(0, 0, 0, 0.35) 30%, transparent 62%);
+}
+.fog-light__rays--diag {
+  transform: rotate(45deg) scale(0.7);
+  opacity: 0.55;
 }
 
-/* Desktop: farol um pouco maior */
+@keyframes fl-breathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.06); opacity: 0.9; }
+}
+
 @media (min-width: 1024px) {
   .fog-light {
-    --fl-size: 120px;
-    right: calc(var(--fl-size) * -0.38);
+    --fl-size: 520px;
   }
 }
 
-/* Movimento reduzido: só um brilho leve, sem feixe varrendo a tela */
+/* Movimento reduzido: sem luz andando pela tela */
 @media (prefers-reduced-motion: reduce) {
-  .fog-light__beam {
-    display: none;
-  }
   .fog-light {
-    --fl-dur-on: 0ms;
-    --fl-dur-off: 0ms;
+    display: none;
   }
 }
