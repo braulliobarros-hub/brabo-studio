@@ -1,85 +1,82 @@
 /**
- * Farol de milha decorativo.
- * Acende quando a pessoa rola a página ou mexe o mouse/dedo
- * e apaga suave depois de ~1,2s sem movimento.
+ * Farol de milha: luz de LED que segue o mouse ou anda com o scroll.
+ * - Mouse: a luz vai atrás do cursor com um leve atraso (suave).
+ * - Scroll / toque: a luz passeia pela tela conforme a página rola.
+ * Acende quando tem movimento e apaga suave depois de ~1,2s parado.
  */
 (function () {
-  var NS = 'http://www.w3.org/2000/svg';
-  var OFF_DELAY = 1200;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var OFF_DELAY = 1200;   // tempo parado até começar a apagar
+  var FADE_OUT = 1500;    // tempo da transição de apagar (casa com o CSS)
+  var EASE = 0.12;        // quanto menor, mais "atrasada" e suave a luz
 
   var wrap = document.createElement('div');
   wrap.className = 'fog-light';
   wrap.setAttribute('aria-hidden', 'true');
   wrap.innerHTML =
-    '<div class="fog-light__beam"></div>' +
-    '<div class="fog-light__bloom"></div>' +
-    '<svg class="fog-light__svg" viewBox="0 0 100 100" xmlns="' + NS + '">' +
-      '<defs>' +
-        '<linearGradient id="flChrome" x1="0" y1="0" x2="1" y2="1">' +
-          '<stop offset="0" stop-color="#f2f4f7"/>' +
-          '<stop offset="0.35" stop-color="#7d828a"/>' +
-          '<stop offset="0.55" stop-color="#d9dde2"/>' +
-          '<stop offset="1" stop-color="#3a3d42"/>' +
-        '</linearGradient>' +
-        '<radialGradient id="flLensOff" cx="0.42" cy="0.38" r="0.7">' +
-          '<stop offset="0" stop-color="#3a3f47"/>' +
-          '<stop offset="0.6" stop-color="#16181c"/>' +
-          '<stop offset="1" stop-color="#0a0b0d"/>' +
-        '</radialGradient>' +
-        '<radialGradient id="flLensOn" cx="0.5" cy="0.5" r="0.55">' +
-          '<stop offset="0" stop-color="#ffffff"/>' +
-          '<stop offset="0.35" stop-color="#eaf3ff"/>' +
-          '<stop offset="0.75" stop-color="#9cc4ff"/>' +
-          '<stop offset="1" stop-color="#3d86ff"/>' +
-        '</radialGradient>' +
-      '</defs>' +
-      // carcaça preta
-      '<circle cx="50" cy="50" r="48" fill="#0b0c0e" stroke="#000" stroke-width="1"/>' +
-      // aro cromado
-      '<circle cx="50" cy="50" r="43" fill="url(#flChrome)"/>' +
-      '<circle cx="50" cy="50" r="38" fill="#08090a"/>' +
-      // lente apagada
-      '<circle cx="50" cy="50" r="36" fill="url(#flLensOff)"/>' +
-      // lente acesa (some/aparece)
-      '<g class="fog-light__lit">' +
-        '<circle cx="50" cy="50" r="36" fill="url(#flLensOn)"/>' +
-      '</g>' +
-      // anéis do refletor (desenho da lente)
-      '<g fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="0.8">' +
-        '<circle cx="50" cy="50" r="30"/>' +
-        '<circle cx="50" cy="50" r="23"/>' +
-        '<circle cx="50" cy="50" r="16"/>' +
-        '<path d="M14 50 H86 M50 14 V86"/>' +
-      '</g>' +
-      // lâmpada
-      '<circle cx="50" cy="50" r="6" fill="#cfd4da" opacity="0.85"/>' +
-      // reflexo do vidro
-      '<path d="M26 34 A28 28 0 0 1 46 20" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2.5" stroke-linecap="round"/>' +
-    '</svg>';
-
+    '<div class="fog-light__led">' +
+      '<span class="fog-light__wash"></span>' +
+      '<span class="fog-light__halo"></span>' +
+      '<span class="fog-light__rays"></span>' +
+      '<span class="fog-light__rays fog-light__rays--diag"></span>' +
+      '<span class="fog-light__bloom"></span>' +
+    '</div>';
   document.body.appendChild(wrap);
+  var led = wrap.firstChild;
 
-  var timer = null;
-  var ticking = false;
+  var vw = window.innerWidth;
+  var vh = window.innerHeight;
+  var target = { x: vw * 0.7, y: vh * 0.4 };
+  var pos = { x: target.x, y: target.y };
 
-  function turnOn() {
-    ticking = false;
+  var offTimer = null;
+  var stopTimer = null;
+  var running = false;
+
+  function scrollTarget() {
+    var s = window.scrollY || 0;
+    target.x = vw * (0.5 + 0.34 * Math.sin(s / 420));
+    target.y = vh * (0.42 + 0.22 * Math.sin(s / 700 + 1));
+  }
+
+  function frame() {
+    pos.x += (target.x - pos.x) * EASE;
+    pos.y += (target.y - pos.y) * EASE;
+    led.style.transform = 'translate3d(' + pos.x.toFixed(1) + 'px,' + pos.y.toFixed(1) + 'px,0)';
+    if (running) requestAnimationFrame(frame);
+  }
+
+  function wake() {
     wrap.classList.add('is-on');
-    clearTimeout(timer);
-    timer = setTimeout(function () {
+    clearTimeout(offTimer);
+    clearTimeout(stopTimer);
+    if (!running) {
+      running = true;
+      requestAnimationFrame(frame);
+    }
+    offTimer = setTimeout(function () {
       wrap.classList.remove('is-on');
+      // só para o loop depois que terminou de apagar
+      stopTimer = setTimeout(function () { running = false; }, FADE_OUT);
     }, OFF_DELAY);
   }
 
-  function onActivity() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(turnOn);
-  }
-
   var opts = { passive: true };
-  window.addEventListener('scroll', onActivity, opts);
-  window.addEventListener('mousemove', onActivity, opts);
-  window.addEventListener('touchmove', onActivity, opts);
-  window.addEventListener('wheel', onActivity, opts);
+
+  window.addEventListener('mousemove', function (e) {
+    target.x = e.clientX;
+    target.y = e.clientY;
+    wake();
+  }, opts);
+
+  window.addEventListener('scroll', function () {
+    scrollTarget();
+    wake();
+  }, opts);
+
+  window.addEventListener('resize', function () {
+    vw = window.innerWidth;
+    vh = window.innerHeight;
+  }, opts);
 })();
