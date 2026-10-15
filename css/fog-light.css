@@ -1,0 +1,94 @@
+/* ==========================================================================
+   Farol de milha: decorativo, fixo na lateral direita.
+   Acende suave quando a pessoa rola a página ou mexe o mouse, e apaga
+   sozinho depois de um tempo parado (controle em js/fog-light.js).
+   ========================================================================== */
+.fog-light {
+  --fl-size: 72px;
+  --fl-dur-on: 700ms;
+  --fl-dur-off: 1400ms;
+  position: fixed;
+  top: 50%;
+  right: calc(var(--fl-size) * -0.5);
+  width: var(--fl-size);
+  height: var(--fl-size);
+  transform: translateY(-50%);
+  z-index: 35;
+  pointer-events: none;
+}
+
+/* Feixe de luz projetado pra esquerda */
+.fog-light__beam {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  width: min(120vw, 1100px);
+  height: calc(var(--fl-size) * 5);
+  transform: translateY(-50%);
+  background:
+    radial-gradient(ellipse 60% 50% at 100% 50%,
+      rgba(225, 238, 255, 0.30) 0%,
+      rgba(120, 175, 255, 0.14) 35%,
+      rgba(0, 100, 254, 0.05) 60%,
+      rgba(0, 100, 254, 0) 80%);
+  clip-path: polygon(100% 44%, 0 0, 0 100%, 100% 56%);
+  filter: blur(20px);
+  opacity: 0;
+  transition: opacity var(--fl-dur-off) var(--ease-standard);
+  mix-blend-mode: screen;
+}
+
+/* Brilho em volta do farol (bloom) */
+.fog-light__bloom {
+  position: absolute;
+  inset: -70%;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(235, 244, 255, 0.55) 0%,
+    rgba(110, 170, 255, 0.22) 30%,
+    rgba(0, 100, 254, 0) 65%);
+  opacity: 0;
+  transition: opacity var(--fl-dur-off) var(--ease-standard);
+  mix-blend-mode: screen;
+}
+
+.fog-light__svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.6));
+}
+
+/* Lente acesa: camada por cima da lente apagada */
+.fog-light__lit {
+  opacity: 0;
+  transition: opacity var(--fl-dur-off) var(--ease-standard);
+}
+
+/* ---------- ACESO ---------- */
+.fog-light.is-on .fog-light__beam,
+.fog-light.is-on .fog-light__bloom,
+.fog-light.is-on .fog-light__lit {
+  opacity: 1;
+  transition-duration: var(--fl-dur-on);
+}
+
+/* Desktop: farol um pouco maior */
+@media (min-width: 1024px) {
+  .fog-light {
+    --fl-size: 120px;
+    right: calc(var(--fl-size) * -0.38);
+  }
+}
+
+/* Movimento reduzido: só um brilho leve, sem feixe varrendo a tela */
+@media (prefers-reduced-motion: reduce) {
+  .fog-light__beam {
+    display: none;
+  }
+  .fog-light {
+    --fl-dur-on: 0ms;
+    --fl-dur-off: 0ms;
+  }
+}
